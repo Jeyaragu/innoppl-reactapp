@@ -1,0 +1,15 @@
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  /* background: #1b1620ed; */
+  background: #49c1a2;
+  color: #fff;
+  /* color: orange; */
+  cursor: pointer;
+}
+
+button:hover {
+  background: #37a08e;
+}
