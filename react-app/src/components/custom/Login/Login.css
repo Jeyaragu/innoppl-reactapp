@@ -41,3 +41,8 @@
   display: flex;
   justify-content: flex-end;
 }
+
+#login p {
+  display: flex;
+  justify-content: flex-end;
+}
