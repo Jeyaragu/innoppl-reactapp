@@ -54,7 +54,7 @@ function SignUp() {
             type="text"
             placeholder="Enter E-Mail name"
             name="user_email_addr"
-            value={signupPayload.email}
+            value={signupPayload.user_email_addr}
             onChange={(e) => handleChange(e.target.value, "user_email_addr")}
           ></input>
         </div>
