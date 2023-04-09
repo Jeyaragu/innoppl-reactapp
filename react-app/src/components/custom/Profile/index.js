@@ -1,12 +1,13 @@
 import React from "react";
 
 const Profile = (props) => {
-  let data = sessionStorage.getItem("userID");
+  const data = sessionStorage.getItem("userInfo");
+  console.log(JSON.parse(data));
   return (
     <div>
       Profile page
-      <label>Name: {data.user_name}</label>
-      <label>E-MailAddress: {data.user_email_addr}</label>
+      <p>Name: {data.user_name}</p>
+      <p>E-MailAddress: {data.user_email_addr}</p>
     </div>
   );
 };

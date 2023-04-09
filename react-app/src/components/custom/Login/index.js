@@ -1,22 +1,34 @@
-import { useState } from "react";
+import { React, useState } from "react";
 import Button from "../../common/Button";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Login() {
+  const navigate = useNavigate();
   const [logInPayload, setlogInPayload] = useState({
     user_email_addr: "",
     password: "",
   });
-  const handleChanges = (value, data) => {};
+  const [loginError, setLoginError] = useState();
+
+  const handleChanges = (value, data) => {
+    setlogInPayload({ ...logInPayload, [data]: value });
+  };
+
   const loginUser = async () => {
     const loginResponse = await axios.post(
       "http://localhost:4000/api/login",
       logInPayload
     );
-    console.log(loginResponse);
+    if (loginResponse.status === 200) {
+      sessionStorage.setItem("userInfo", loginResponse?.data?.data);
+      navigate("/profile");
+    } else {
+      setLoginError(loginResponse.data.message);
+    }
   };
+
   return (
     <div id="login">
       <div className="form-wrap">
@@ -25,9 +37,10 @@ function Login() {
         <div className="form-group">
           <label>E-Mail Address *</label>
           <input
-            type="text"
+            type="email"
             placeholder="Enter E-Mail name"
             name="user_email_addr"
+            value={logInPayload.user_name}
             onChange={(e) => {
               handleChanges(e.target.value, "user_email_addr");
             }}
@@ -39,6 +52,7 @@ function Login() {
             type="password"
             placeholder="Enter password"
             name="password"
+            value={logInPayload.password}
             onChange={(e) => {
               handleChanges(e.target.value, "password");
             }}
@@ -57,6 +71,7 @@ function Login() {
         New User <Link to="/signup">Signup </Link>
         <hr />
       </p>
+      {loginError && <p>{loginError}</p>}
     </div>
   );
 }

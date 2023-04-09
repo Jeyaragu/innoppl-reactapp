@@ -19,12 +19,10 @@ function SignUp() {
   };
 
   const createUser = async (e) => {
-    console.log("create user");
     const res = await axios.post(
       "http://localhost:4000/api/signin",
       signupPayload
     );
-    console.log("res", res);
     if (res.status === 200) {
       sessionStorage.setItem("userID", res?.data?.data?._id);
       navigate("/profile");
